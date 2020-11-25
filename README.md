@@ -7,11 +7,11 @@ No **external dependencies** used apart from **chalk.js** for coloured outputs.
 
 ## Features:
 
- - [ ] Parses command line arguments like		 
+ - Parses command line arguments like		 
 	- -flag=value
 	- -flag value
-- [ ] Allows user to set commands
-- [ ] Generates usage details of the CLI application
+- Allows user to set commands
+- Generates usage details of the CLI application
 
 well go down to know more...
 
