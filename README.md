@@ -18,14 +18,6 @@ well go down to know more...
 ## Usage:
 
 ### Getting started
-
--	 Download the `termparse.js` file and place it in your project directory.
--	To use it in project:
-	```nodejs
-	const Termparse=require(path/to/termparse.js);
-	```	
-or
-
 -	use NPM
 	```bash
 	npm i termparse
@@ -34,7 +26,7 @@ and you are ready to go
 
 ### Adding commands for the application
 ```js
-const Termparse=require(path/to/termparse.js);
+const Termparse=require("termparse");
 
 //initializing
 var termparse=new Termparse.init();
@@ -137,7 +129,7 @@ using `getFlag()` lets user use the flags value to do various function.
 Let's modify the first usage example little bit:
 
 ```js
-const Termparse=require(path/to/termparse.js);
+const Termparse=require("termparse");
 
 //initializing
 var termparse=new Termparse.init();
