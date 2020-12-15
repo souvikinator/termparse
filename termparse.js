@@ -27,7 +27,6 @@ termparse.prototype.parse=function(args){
         process.exit(); 
     }
 
-    //FIXME:change for loop
     for(n in command_args){
         let rxp1_res=rxp1.exec(command_args[n]);
         let rxp2_res=rxp2.exec(command_args[n]);

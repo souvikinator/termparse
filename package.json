@@ -1,0 +1,28 @@
+{
+  "name": "termparse",
+  "version": "1.0.0",
+  "description": "CLI maker and Command line arg parser",
+  "main": "termparse.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarthCucumber/termparse.git"
+  },
+  "keywords": [
+    "cli",
+    "command line argument",
+    "arguments",
+    "command line"
+  ],
+  "author": "Souvik Kar Mahapatra <souvikat001@gmail.com> (https://github.com/DarthCucumber)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DarthCucumber/termparse/issues"
+  },
+  "homepage": "https://github.com/DarthCucumber/termparse#readme",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}
