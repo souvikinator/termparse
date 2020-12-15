@@ -1,3 +1,4 @@
+//Copyright 2020, souvik
 const chalk=require('chalk');
 
 var termparse=function(){};
