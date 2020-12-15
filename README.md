@@ -7,11 +7,11 @@ No **external dependencies** used apart from **chalk.js** for coloured outputs.
 
 ## Features:
 
- - [ ] Parses command line arguments like		 
+ - Parses command line arguments like		 
 	- -flag=value
 	- -flag value
-- [ ] Allows user to set commands
-- [ ] Generates usage details of the CLI application
+- Allows user to set commands
+- Generates usage details of the CLI application
 
 well go down to know more...
 
@@ -79,9 +79,9 @@ Adds commands to the CLI application.
 Takes object as input with following keys:
 ```json
 {
-	name:"name of command here",//required
-	usage:"usage details of the command",//optional
-	run:"adds functionality to commad"//required
+	"name":"name of command here",
+	"usage":"usage details of the command",
+	"run":"adds functionality to commad"
 }
 ```
 `usage` takes the details of what the command does which is recommended to generate a auto-usage guide.
@@ -96,10 +96,10 @@ Adds flags/options to a specific command of your CLI application.
 
 ```json
 {
-	name:"name of flag",//required
-	type:"type of flag",//[boolean/string], default- boolean"
-	value:"value of flag",//more details below
-	usage:"usage details"
+	"name":"name of flag",
+	"type":"type of flag",
+	"value":"value of flag",
+	"usage":"usage details"
 }
 ```
 
@@ -120,10 +120,10 @@ returns flag property object
 ```json
 //content of flag property object
 {
-	type:"type of flag",
-	value:"value of flag",
-	usage:"usage of the flag",
-	present:"whether flag is passed as arg or not"
+	"type":"type of flag",
+	"value":"value of flag",
+	"usage":"usage of the flag",
+	"present":"whether flag is passed as arg or not"
 }
 ```
 using `getFlag()` lets user use the flags value to do various function.
