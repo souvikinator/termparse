@@ -24,6 +24,13 @@ well go down to know more...
 	```nodejs
 	const Termparse=require(path/to/termparse.js);
 	```	
+or
+
+-	use NPM
+	```bash
+	npm i termparse
+	```
+and you are ready to go
 
 ### Adding commands for the application
 ```js
