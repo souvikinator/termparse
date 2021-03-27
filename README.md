@@ -107,7 +107,7 @@ Takes in multiple flag property objects as shown in the very first example.
 }
 ```
 
-- `type` can be either `boolean` or `string`. If no type is passed then default is `boolean`
+- `type` can be either `boolean`/`string`/`number`. If no type is passed then default is `boolean`.
 
 - `value`  if flag type is boolean then it takes true/false, default being false in boolean. If flag type is string then it takes string as value, default being empty string.
 
