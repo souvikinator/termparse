@@ -2,6 +2,8 @@
 
 A minimal node js CLI maker.
 
+**Note:** Version 2 has breaking changes so make sure to read below and make changes to your application accordingly
+
 ## Technology used:
 No **external dependencies** used apart from **chalk.js** for coloured outputs.
 
@@ -40,7 +42,7 @@ tp.addCommand({
 	//this.getFlag(flagName) returns flag object
         console.log(`accessing flags using getFlag`,this.getFlag("flag1"));
     }
-}).setFlags({
+}).setFlags({ //chaining setFlags with addCommand
     name:"flag1",
     usage:"this is flag 1 for command 1"
 },{
