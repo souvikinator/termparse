@@ -44,10 +44,13 @@ tp.addCommand({
     }
 }).setFlags({ //chaining setFlags with addCommand
     name:"flag1",
-    usage:"this is flag 1 for command 1"
+    usage:"this is flag 1 for command 1",
+    type:"string",
+    value:"hahaha"
 },{
     name:"flag2",
     usage:"this is flag 2 for command 1"
+    //no type and value passed implies default: type:"boolean" and value:false
 });
 
 // 2nd command
@@ -61,6 +64,8 @@ tp.addCommand({
 }).setFlags({
     name:"gas1",
     usage:"this is flag 1 (gas 1) for command 2"
+    type:"number",
+    value:2000
 });
 
 var args=process.argv.slice(2);
