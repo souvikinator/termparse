@@ -1,6 +1,6 @@
 {
   "name": "termparse",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "CLI maker and Command line arg parser",
   "main": "termparse.js",
   "scripts": {
