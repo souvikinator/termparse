@@ -60,6 +60,8 @@ tp.addCommand({
     run:function(){
         //another way to access flag object this.flags.<flag_name>
         console.log(`another way to access flag`,this.flags.gas1);
+	//accessing args (non flag type)
+	console.log(tp.args);
     }
 }).setFlags({
     name:"gas1",
