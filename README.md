@@ -11,11 +11,9 @@ No **external dependencies** used apart from **chalk.js** for coloured outputs.
 	- -flag=value
 	- -flag value
 - Allows user to set commands
+- Can have same named flags for different commands
 - Generates usage details of the CLI application
 
-well go down to know more...
-
-## Usage:
 
 ### Getting started
 -	use NPM
@@ -24,58 +22,57 @@ well go down to know more...
 	```
 and you are ready to go
 
-### Adding commands for the application
+### Demo
+
+
 ```js
-const Termparse=require("termparse");
+const Termparse = require("termparse");
 
-//initializing
-var termparse=new Termparse.init();
+//create a instance
+const tp=new Termparse();
 
-//adding commands for cli application
-termparse.addCommand({
-	name:"cmd1",
-	usage:"cmd1 usage details here",
-	run: function(){
-		//functioning of cmd1 here
-		console.log("cmd1 called");
-	} 
+//1st command
+tp.addCommand({
+    name:"cmd1",
+    usage:"this is command 1",
+    run:function(){
+    	//adding functionality to cmd1
+	//this.getFlag(flagName) returns flag object
+        console.log(`accessing flags using getFlag`,this.getFlag("flag1"));
+    }
+}).setFlags({
+    name:"flag1",
+    usage:"this is flag 1 for command 1"
+},{
+    name:"flag2",
+    usage:"this is flag 2 for command 1"
 });
 
-termparse.addCommand({
-	name:"cmd2",
-	usage:"cmd2 usage details here",
-	run: function(){
-		//function of cmd1 here
-		console.log("cmd2 called");
-	} 
+// 2nd command
+tp.addCommand({
+    name:"cmd1",
+    usage:"this is command 1",
+    run:function(){
+        //another way to access flag object this.flags.<flag_name>
+        console.log(`another way to access flag`,this.flags.gas1);
+    }
+}).setFlags({
+    name:"gas1",
+    usage:"this is flag 1 (gas 1) for command 2"
 });
 
-//adding options/flags to commands
-termparse.setFlag('cmd1',{
-	name:'flag1',
-	type:'string',
-	value:'default value',
-	usage:'usage details of flag1'
-});
-
-termparse.setFlag('cmd2',{
-	name:'flag2',
-	type:'boolean',
-	value:false,
-	usage:'usage details of flag2'
-});
-
-//getting command line args
 var args=process.argv.slice(2);
 
-//passing command line args to termparse
-termparse.parse(args);
+tp.parse(args);
+
 ```
+
+### Usage:
 
 ## `addCommand(options)`
 
 Adds commands to the CLI application.
-Takes object as input with following keys:
+Takes command property object as input like so
 ```json
 {
 	"name":"name of command here",
@@ -83,15 +80,16 @@ Takes object as input with following keys:
 	"run":"adds functionality to commad"
 }
 ```
-`usage` takes the details of what the command does which is recommended to generate a auto-usage guide.
+- `usage` takes the details of what the command does which is recommended to generate a auto-usage guide.
+- `run` takes function and the function is called when the command is used in terminal. 
 
-`run` takes function and the function is called when the command is called in terminal.
+**NOTE:** do not pass fat arrow function or ()=>{} to run. Rather use function(){}.
 
-## `setFlag(command_name,options)`
+## `setFlags(options...)`
 
-Adds flags/options to a specific command of your CLI application.
-`command_name` takes name of the command the flag/option will be associated with.
-`option` takes object with following keys:
+Adds flags/options to a specific command of your CLI application. This function is used by chaining it to the `addCommand({...})` function.
+
+Takes in multiple flag property objects as shown in the very first example.
 
 ```json
 {
@@ -102,17 +100,15 @@ Adds flags/options to a specific command of your CLI application.
 }
 ```
 
-`type` can be either `boolean` or `string`
-if no type is passed then default is `boolean`
+- `type` can be either `boolean` or `string`. If no type is passed then default is `boolean`
 
-`value`  if flag type is boolean then it takes true/false, default being false in boolean.
-if flag type is string then it takes string as value, default being empty string.
+- `value`  if flag type is boolean then it takes true/false, default being false in boolean. If flag type is string then it takes string as value, default being empty string.
 
-## `getFlag(command_name,flag_name)`
+## `getFlag(flag_name)`
 
-Gets flags/options object of a specific command of your CLI application.
-`command_name` takes name of the command the flag/option will be associated with.
-`flag` takes name of the flag
+Gets flag/option object of a specific command of your CLI application. Can be used within the `run` property of the `addCommand({...})`
+
+- `flag` takes name of the flag
 
 returns flag property object
 
@@ -125,56 +121,4 @@ returns flag property object
 	"present":"whether flag is passed as arg or not"
 }
 ```
-using `getFlag()` lets user use the flags value to do various function.
-Let's modify the first usage example little bit:
-
-```js
-const Termparse=require("termparse");
-
-//initializing
-var termparse=new Termparse.init();
-
-//adding commands for cli application
-termparse.addCommand({
-	name:"cmd1",
-	usage:"cmd1 usage details here",
-	run: function(){
-		//usage of getFlag()
-		let flag1=termparse.getFlag("cmd1","flag1");
-		if(flag1.value.length>0){
-			console.log(`value of flag1= ${flag1.value}`);
-		}
-	} 
-});
-
-termparse.addCommand({
-	name:"cmd2",
-	usage:"cmd2 usage details here",
-	run: function(){
-		//function of cmd1 here
-		console.log("cmd2 called");
-	} 
-});
-
-//adding options/flags to commands
-termparse.setFlag('cmd1',{
-	name:'flag1',
-	type:'string',
-	value:'default value',
-	usage:'usage details of flag1'
-});
-
-termparse.setFlag('cmd2',{
-	name:'flag2',
-	type:'boolean',
-	value:false,
-	usage:'usage details of flag2'
-});
-
-//getting command line args
-var args=process.argv.slice(2);
-
-//passing command line args to termparse
-termparse.parse(args);
-
-```
+using `getFlag()` lets user use the flags value to do various functions.
