@@ -22,8 +22,6 @@ function setflags(...flagProps) {
             console.error(chalk.red(`setFlags(): invalid argument type, argument type has to be Object`));
             process.exit();
         }
-        //FIXME:
-        // let tmpf = { ...flagObj };
         let tmpf = Object.assign({
             name: "",
             type: "boolean",
@@ -56,8 +54,6 @@ function Termparse() {
     this.addCommand = function (options) {
 
         //assigning the passed options to the tmp cmdObj
-        // FIXME:
-        // let tmp = { ...cmdObj };
         options = Object.assign({
             name: "",
             usage: "",
@@ -95,7 +91,6 @@ function Termparse() {
         }
         let cmd = args[0];//command
         let cmd_args = args.slice(1);//args except command 
-        // TODO: study this
         let rxp1 = new RegExp("^\-(.*)\=([^]*)"); //for -flag=value
         let rxp2 = new RegExp("^\-(.*)"); //for -flag value
         this.args = new Array();
@@ -163,7 +158,6 @@ function Termparse() {
                 //if flag exists and the type is string then next arg is it's value
                 if (flg_obj.type === "string") {
                     //error handling
-                    //TODO: why below line?
                     let flag_val_type = typeof (cmd_args[parseInt(n) + 1]);
                     if (flag_val_type === "undefined" || flag_val_type === "null") {
                         console.log(chalk.red(`'-${rxp2_res[1]}' used but no value passed`));
