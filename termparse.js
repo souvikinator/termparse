@@ -60,7 +60,8 @@ function Termparse() {
             run: function () { },
             flags: {},
             setFlags: setflags,
-            getFlag: getflag
+            getFlag: getflag,
+            args: []
         }, options)
         //error handling
         if (options.name.length === 0) {
@@ -164,13 +165,15 @@ function Termparse() {
                         process.exit();
                     }
                     flg_obj.value = cmd_args[parseInt(n) + 1];
-                    flg_obj.isPresent=true;
+                    flg_obj.isPresent = true;
                     //remove already parsed command line args
                     cmd_args.splice(parseInt(n) + 1, 1); //remove the next element to avoid conflict
                 }
             } else {
                 //rest are arguments. store them
                 this.args.push(cmd_args[n]);
+                //so that args are accessible from each commands
+                this.commands[cmd].args.push(cmd_args[n]);
             }
 
         }
@@ -178,34 +181,22 @@ function Termparse() {
         this.commands[cmd].run();
     }
 
+    // usage menu
     this.showHelp = function () {
-        let usage_guide = "";
-        for (let cmd in this.commands) {
-            if (this.commands[cmd].hasOwnProperty("usage")) {
-
-                usage_guide += `
-    ${chalk.blueBright("Command:")} ${this.commands[cmd].name}
-
-    ${chalk.magentaBright("Usage:")} ${this.commands[cmd].usage}
-
-    ${chalk.greenBright("Flags:")}
-    `;
-                // TODO: make it clean
-                for (let flg in this.commands[cmd].flags) {
-                    usage_guide += `
-    -${this.commands[cmd].flags[flg].name}    ${this.commands[cmd].flags[flg].type}    ${this.commands[cmd].flags[flg].usage}
-    `;
-                }
+        for (let c in this.commands) {
+            let command = this.commands[c];
+            console.log(`${chalk.blueBright("Command:")} ${command.name}`);
+            console.log(`${chalk.magentaBright("Usage:")} ${command.usage}`);
+            console.log(`   ${chalk.greenBright("Flags:")}`);
+            for (let f in command.flags) {
+                let flag = command.flags[f];
+                console.log(`   ${flag.name}  :  [${flag.type}]   ${flag.usage}`);
             }
+            console.log("\n");
         }
-        usage_guide += `
-    ${chalk.yellowBright("General:")}
-    -help       display usage guide
-    `;
-        console.log(usage_guide);
+        console.log(`${chalk.yellowBright("General:")}`);
+        console.log("   -help  :  display help/usage guide");
     }
-
-
 }
 
 module.exports = Termparse;

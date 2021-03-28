@@ -1,31 +1,39 @@
-# 𝗧𝗲𝗿𝗺-𝗽𝗮𝗿𝘀𝗲 _
+# 𝗧𝗲𝗿𝗺𝗽𝗮𝗿𝘀𝗲 \_
 
 A minimal node js CLI maker.
 
 **Note:** Version 2 has breaking changes so make sure to read below and make changes to your application accordingly
 
+## v2.0.3
+
+- modified the look of usage menu, made it cleaner
+- now args are accessible within the `run` property of `addCommand` using `this.args`. Check below for example.
+
+## v2.0.2 (breaking changes)
+
+- Removed previous methods and added chaining of methods. `setFlags` can be chained with `addCommand`
+- `setFlags` takes in multiple flag property. check below for example
+
 ## Technology used:
+
 No **external dependencies** used apart from **chalk.js** for coloured outputs.
 
 ## Features:
 
- - Parses command line arguments like		 
-	- -flag=value
-	- -flag value
+- Parses command line arguments like
+  - -flag=value
+  - -flag value
 - Allows user to set commands
 - Can have same named flags for different commands
 - Generates usage details of the CLI application
 
-
 ### Getting started
--	use NPM
-	```bash
-	npm i termparse
-	```
-and you are ready to go
+
+- use NPM
+  `bash npm i termparse `
+  and you are ready to go
 
 ### Demo
-
 
 ```js
 const Termparse = require("termparse");
@@ -41,6 +49,8 @@ tp.addCommand({
     	//adding functionality to cmd1
 	//this.getFlag(flagName) returns flag object
         console.log(`accessing flags using getFlag`,this.getFlag("flag1"));
+        //way to access arguments
+        console.log(this.args)
     }
 }).setFlags({ //chaining setFlags with addCommand
     name:"flag1",
@@ -55,12 +65,12 @@ tp.addCommand({
 
 // 2nd command
 tp.addCommand({
-    name:"cmd1",
-    usage:"this is command 1",
+    name:"cmd2",
+    usage:"this is command 2",
     run:function(){
         //another way to access flag object this.flags.<flag_name>
         console.log(`another way to access flag`,this.flags.gas1);
-	//accessing args (non flag type)
+	//another way to access args (non flag type)
 	console.log(tp.args);
     }
 }).setFlags({
@@ -70,8 +80,12 @@ tp.addCommand({
     value:2000
 });
 
-var args=process.argv.slice(2);
+// accessing help/usage menu
+tp.showHelp()
 
+//get args from comamnd line
+var args=process.argv.slice(2);
+//pass arguments to termparse
 tp.parse(args);
 
 ```
@@ -82,15 +96,17 @@ tp.parse(args);
 
 Adds commands to the CLI application.
 Takes command property object as input like so
+
 ```json
 {
-	"name":"name of command here",
-	"usage":"usage details of the command",
-	"run":"adds functionality to commad"
+  "name": "name of command here",
+  "usage": "usage details of the command",
+  "run": "adds functionality to commad"
 }
 ```
+
 - `usage` takes the details of what the command does which is recommended to generate a auto-usage guide.
-- `run` takes function and the function is called when the command is used in terminal. 
+- `run` takes function and the function is called when the command is used in terminal.
 
 **NOTE:** do not pass fat arrow function or ()=>{} to run. Rather use function(){}.
 
@@ -102,16 +118,16 @@ Takes in multiple flag property objects as shown in the very first example.
 
 ```json
 {
-	"name":"name of flag",
-	"type":"type of flag",
-	"value":"value of flag",
-	"usage":"usage details"
+  "name": "name of flag",
+  "type": "type of flag",
+  "value": "value of flag",
+  "usage": "usage details"
 }
 ```
 
 - `type` can be either `boolean`/`string`/`number`. If no type is passed then default is `boolean`.
 
-- `value`  if flag type is boolean then it takes true/false, default being false in boolean. If flag type is string then it takes string as value, default being empty string.
+- `value` if flag type is boolean then it takes true/false, default being false in boolean. If flag type is string then it takes string as value, default being empty string.
 
 ## `getFlag(flag_name)`
 
@@ -124,10 +140,11 @@ returns flag property object
 ```json
 //content of flag property object
 {
-	"type":"type of flag",
-	"value":"value of flag",
-	"usage":"usage of the flag",
-	"present":"whether flag is passed as arg or not"
+  "type": "type of flag",
+  "value": "value of flag",
+  "usage": "usage of the flag",
+  "present": "whether flag is passed as arg or not"
 }
 ```
+
 using `getFlag()` lets user use the flags value to do various functions.

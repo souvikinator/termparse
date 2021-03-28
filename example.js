@@ -25,7 +25,7 @@ tp.addCommand({
     name:"cmd2",
     usage:"this is command 1",
     run:function(){
-        console.log(`another way to access flag`,this.flags.flag1); //this.flags.<flag_name>
+        console.log(this.args); //this.flags.<flag_name>
     }
 }).setFlags({
     name:"flag1",

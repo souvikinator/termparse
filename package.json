@@ -1,6 +1,6 @@
 {
   "name": "termparse",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "CLI maker and Command line arg parser",
   "main": "termparse.js",
   "scripts": {
@@ -14,7 +14,10 @@
     "cli",
     "command line argument",
     "arguments",
-    "command line"
+    "command line",
+    "parser",
+    "args",
+    "termparse"
   ],
   "author": "Souvik Kar Mahapatra <souvikat001@gmail.com> (https://github.com/DarthCucumber)",
   "license": "MIT",
