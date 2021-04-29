@@ -8,7 +8,8 @@ tp.addCommand({
     name:"cmd1",
     usage:"this is command 1",
     run:function(){
-        console.log(`accessing flags using getFlag`,this.getFlag("flag1"));
+        console.log("flag1=>",this.getFlag('flag1').value);
+        console.log("flag2=>",this.getFlag('flag2').value);
     }
 }).setFlags({
     name:"flag1",
@@ -25,7 +26,7 @@ tp.addCommand({
     name:"cmd2",
     usage:"this is command 1",
     run:function(){
-        console.log(this.args); //this.flags.<flag_name>
+        console.log(this.args); 
     }
 }).setFlags({
     name:"flag1",
